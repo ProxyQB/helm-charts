@@ -16,6 +16,8 @@ spec:
   mode: ActiveFailover
   image: "arangodb/arangodb:3.11.3"
   environment: Production
+  externalAccess:
+    type: NodePort
   tls:
     caSecretName: None
   dbservers:
