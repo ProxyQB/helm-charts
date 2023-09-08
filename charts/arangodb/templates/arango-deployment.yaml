@@ -17,8 +17,7 @@ spec:
   image: "arangodb/arangodb:3.11.3"
   environment: Production
   externalAccess:
-    type: NodePort
-    nodePort: 80
+    type: None
   tls:
     caSecretName: None
   dbservers:
