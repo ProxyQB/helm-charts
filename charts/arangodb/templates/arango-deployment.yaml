@@ -18,7 +18,7 @@ spec:
   environment: Production
   externalAccess:
     type: NodePort
-    nodePort: 8529
+    nodePort: 80
   tls:
     caSecretName: None
   dbservers:
