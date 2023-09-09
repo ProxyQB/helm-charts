@@ -26,22 +26,22 @@ spec:
     probes:
       livenessProbeSpec:
         timeoutSeconds: 10
-  #   volumeClaimTemplate:
-  #     spec:
-  #       storageClassName: my-local-ssd
-  #       accessModes:
-  #         - ReadWriteOnce
-  #       resources:
-  #         requests:
-  #           storage: 10Gi
-  #       volumeMode: Filesystem
-  # agents:
-  #   volumeClaimTemplate:
-  #     spec:
-  #       storageClassName: my-local-ssd
-  #       accessModes:
-  #         - ReadWriteOnce
-  #       resources:
-  #         requests:
-  #           storage: 1Gi
-  #       volumeMode: Filesystem
+    volumeClaimTemplate:
+      spec:
+        storageClassName: my-local-ssd
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        volumeMode: Filesystem
+  agents:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: my-local-ssd
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        volumeMode: Filesystem
