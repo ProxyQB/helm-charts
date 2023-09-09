@@ -5,6 +5,8 @@ kind: "ArangoDeployment"
 metadata:
   name: "arangodb"
 spec:
+  architecture: 
+    - arm64
   metrics:
     mode: sidecar
     enabled: true
@@ -24,3 +26,22 @@ spec:
     probes:
       livenessProbeSpec:
         timeoutSeconds: 10
+    volumeClaimTemplate:
+      spec:
+        storageClassName: my-local-ssd
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        volumeMode: Filesystem
+  agents:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: my-local-ssd
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+        volumeMode: Filesystem
