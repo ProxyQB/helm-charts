@@ -24,32 +24,32 @@ spec:
     probes:
       livenessProbeSpec:
         timeoutSeconds: 10
-    volumeClaimTemplate:
-      spec:
-        storageClassName: local-storage
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 15Gi
-        volumeMode: Filesystem
-  agents:
-    volumeClaimTemplate:
-      spec:
-        storageClassName: local-storage
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 2Gi
-        volumeMode: Filesystem
-  single:
-    volumeClaimTemplate:
-      spec:
-        storageClassName: local-storage
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 15Gi
-        volumeMode: Filesystem
+    # volumeClaimTemplate:
+    #   spec:
+    #     storageClassName: local-storage
+    #     accessModes:
+    #       - ReadWriteOnce
+    #     resources:
+    #       requests:
+    #         storage: 15Gi
+    #     volumeMode: Filesystem
+  # agents:
+  #   volumeClaimTemplate:
+  #     spec:
+  #       storageClassName: local-storage
+  #       accessModes:
+  #         - ReadWriteOnce
+  #       resources:
+  #         requests:
+  #           storage: 2Gi
+  #       volumeMode: Filesystem
+  # single:
+  #   volumeClaimTemplate:
+  #     spec:
+  #       storageClassName: local-storage
+  #       accessModes:
+  #         - ReadWriteOnce
+  #       resources:
+  #         requests:
+  #           storage: 15Gi
+  #       volumeMode: Filesystem
