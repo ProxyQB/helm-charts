@@ -1,6 +1,6 @@
 ingress:
   enabled: true
-  className: ''
+  className: 'traefik'
   annotations: {}
   hosts:
     - host: arangodb.cloud.proxyqb.com
