@@ -1,0 +1,12 @@
+ingress:
+  enabled: true
+  className: ''
+  annotations: {}
+  hosts:
+    - host: arangodb.cloud.proxyqb.com
+      innerPort: 8529
+      innerServiceName: arangodb-exposed
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
