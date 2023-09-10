@@ -1,58 +1,22 @@
-{{- if .Values.ingress.enabled -}}
-{{- $fullName := include "arangodb-test-cluster.fullname" . -}}
-{{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
-  {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
-  {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
-  {{- end }}
-{{- end }}
-{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
-{{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
-apiVersion: networking.k8s.io/v1beta1
-{{- else -}}
-apiVersion: extensions/v1beta1
-{{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
-  labels:
-    {{- include "arangodb-test-cluster.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
+  name: arangodb-ingress
   annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
-  {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
-  ingressClassName: {{ .Values.ingress.className }}
-  {{- end }}
-  {{- if .Values.ingress.tls }}
   tls:
-    {{- range .Values.ingress.hosts }}
-    - hosts:
-        - {{ .host | quote }}
-      secretName: {{ .host | quote }}
-  {{- end }}
-  {{- end }}
+  - hosts:
+    - arangodb.cloud.proxyqb.com
+    secretName: arangodb-cloud-proxyqb-com-tls
   rules:
-    {{- range $__, $host := .Values.ingress.hosts }}
-    - host: {{ $host.host | quote }}
+    - host: arangodb.cloud.proxyqb.com
       http:
         paths:
-          {{- range $host.paths }}
-          - path: {{ .path }}
-            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
-            pathType: {{ .pathType }}
-            {{- end }}
+          - path: /
+            pathType: ImplementationSpecific
             backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ $host.innerServiceName }}
+                name: arangodb-exposed
                 port:
-                  number: {{ $host.innerPort }}
-              {{- else }}
-              serviceName: {{ $host.innerServiceName }}
-              servicePort: {{ $host.innerPort }}
-          {{- end }}
-    {{- end }}
-  {{- end }}
-  {{- end }}
+                  number: 8529
