@@ -15,7 +15,7 @@ spec:
     prometheus.io/scrape: "true"
     prometheus.io/port: "9101"
     prometheus.io/scrape_interval: "5s"
-  mode: ActiveFailover
+  mode: Single
   image: "arangodb/arangodb:3.11.3"
   environment: Production
   externalAccess:
