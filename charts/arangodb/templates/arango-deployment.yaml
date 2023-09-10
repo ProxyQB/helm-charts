@@ -36,10 +36,20 @@ spec:
   agents:
     volumeClaimTemplate:
       spec:
-        storageClassName: my-local-ssd
+        storageClassName: local-storage
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
             storage: 2Gi
+        volumeMode: Filesystem
+  single:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: local-storage
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 15Gi
         volumeMode: Filesystem
