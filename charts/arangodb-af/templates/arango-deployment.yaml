@@ -1,0 +1,55 @@
+apiVersion: "database.arangodb.com/v1"
+kind: "ArangoDeployment"
+metadata:
+  name: "arangodb"
+spec:
+  architecture: 
+    - arm64
+  metrics:
+    mode: sidecar
+    enabled: true
+    tls: false
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9101"
+    prometheus.io/scrape_interval: "5s"
+  mode: ActiveFailover
+  image: "arangodb/arangodb:3.11.3"
+  environment: Production
+  externalAccess:
+    type: None
+  tls:
+    caSecretName: None
+  dbservers:
+    probes:
+      livenessProbeSpec:
+        timeoutSeconds: 30
+    # volumeClaimTemplate:
+    #   spec:
+    #     storageClassName: local-storage
+    #     accessModes:
+    #       - ReadWriteOnce
+    #     resources:
+    #       requests:
+    #         storage: 15Gi
+    #     volumeMode: Filesystem
+  # agents:
+  #   volumeClaimTemplate:
+  #     spec:
+  #       storageClassName: local-storage
+  #       accessModes:
+  #         - ReadWriteOnce
+  #       resources:
+  #         requests:
+  #           storage: 2Gi
+  #       volumeMode: Filesystem
+  # single:
+  #   volumeClaimTemplate:
+  #     spec:
+  #       storageClassName: local-storage
+  #       accessModes:
+  #         - ReadWriteOnce
+  #       resources:
+  #         requests:
+  #           storage: 15Gi
+  #       volumeMode: Filesystem
