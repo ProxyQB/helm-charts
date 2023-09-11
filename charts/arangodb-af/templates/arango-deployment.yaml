@@ -15,7 +15,7 @@ spec:
     prometheus.io/scrape_interval: "5s"
   mode: ActiveFailover
   image: "arangodb/arangodb:3.11.3"
-  environment: Production
+  environment: Development
   externalAccess:
     type: None
   tls:
@@ -24,32 +24,8 @@ spec:
     probes:
       livenessProbeSpec:
         timeoutSeconds: 30
-    # volumeClaimTemplate:
-    #   spec:
-    #     storageClassName: local-storage
-    #     accessModes:
-    #       - ReadWriteOnce
-    #     resources:
-    #       requests:
-    #         storage: 15Gi
-    #     volumeMode: Filesystem
-  # agents:
-  #   volumeClaimTemplate:
-  #     spec:
-  #       storageClassName: local-storage
-  #       accessModes:
-  #         - ReadWriteOnce
-  #       resources:
-  #         requests:
-  #           storage: 2Gi
-  #       volumeMode: Filesystem
-  # single:
-  #   volumeClaimTemplate:
-  #     spec:
-  #       storageClassName: local-storage
-  #       accessModes:
-  #         - ReadWriteOnce
-  #       resources:
-  #         requests:
-  #           storage: 15Gi
-  #       volumeMode: Filesystem
+  agents:
+    probes:
+      livenessProbeSpec:
+        timeoutSeconds: 30
+        
