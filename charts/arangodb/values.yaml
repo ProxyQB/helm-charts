@@ -1,0 +1,2 @@
+ingress:
+  host: arangodb.prod.cloud.proxyqb.com

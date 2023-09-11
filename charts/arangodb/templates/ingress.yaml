@@ -7,10 +7,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - arangodb.cloud.proxyqb.com
-    secretName: arangodb-cloud-proxyqb-com-tls
+    - {{ .Values.ingress.host | quote }}
+    secretName: {{ .Values.ingress.host | quote }}
   rules:
-    - host: arangodb.cloud.proxyqb.com
+    - host: {{ .Values.ingress.host | quote }}
       http:
         paths:
           - path: /
