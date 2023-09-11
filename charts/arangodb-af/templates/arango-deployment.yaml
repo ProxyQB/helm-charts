@@ -5,10 +5,10 @@ metadata:
 spec:
   architecture: 
     - arm64
-  metrics:
-    mode: sidecar
-    enabled: true
-    tls: false
+  # metrics:
+  #   mode: sidecar
+  #   enabled: true
+  #   tls: false
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "9101"
